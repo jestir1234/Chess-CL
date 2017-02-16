@@ -1,2 +1,2 @@
 # chess
-Console based chess game with simple computer AI
+Command-line based chess game built with ruby.
