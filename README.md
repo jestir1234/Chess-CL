@@ -6,7 +6,7 @@ Command-line based chess game built with ruby.
 
 # Demo
 ( run game.rb in console )
-- To play against computer.
+- Input 1 in first prompt to play against computer, and 2 to initiate a game with two players.
 
 ```shell
 How many human players?
@@ -44,3 +44,4 @@ Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)
 -
 -
 -
+```
