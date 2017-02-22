@@ -1,7 +1,7 @@
 # About
 Command-line based chess game built with ruby.
  - Player vs Player with interactive prompts to input pieces and moves.
- - Simple computer AI with the ability to judge piece exchange, find current check-mate moves, identify vulnerable pieces, and compare enemy piece values.
+ - Simple computer AI with the ability to judge piece exchange with opponent, find current check-mate moves, protect vulnerable pieces, and compare enemy piece values when given multiple attacking options.
 
 
 # Demo
