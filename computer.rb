@@ -74,7 +74,7 @@ class Computer < Player
             return select_random(valid_moves)
           else
             intersection = @safe_moves & valid_moves
-            if probability <= 85
+            if probability <= 95
               return select_random(intersection)
             else
               return select_random(valid_moves)
