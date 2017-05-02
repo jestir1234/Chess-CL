@@ -63,6 +63,11 @@ class Board
     @cursor = cursor
   end
 
+  def get_piece(pos)
+    row, col = pos
+    grid[row][col]
+  end
+
   def all_positions(color)
     result = []
     (0..7).each do |row|

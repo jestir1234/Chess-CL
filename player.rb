@@ -85,8 +85,9 @@ class Player
       board.set_cursor(@cursor)
       board.display_grid
     end
-    debugger
-    piece = gets.chomp.to_sym
+
+    piece = board.get_piece(@cursor.cursor_pos).to_s[-1].downcase.to_sym
+    
     until PIECES.include?(piece)
       puts "Invalid piece, choose another."
       piece = gets.chomp.to_sym
