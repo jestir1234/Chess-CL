@@ -172,7 +172,7 @@ class Board
 
   def display_grid
     header = (0...grid.length).to_a.join("    ")
-    puts "     #{header}"
+    puts "    #{header}"
     puts "-------------------------------------------"
     (0...grid.length).each_with_index do |x, i|
       puts "#{x} " + display_row(x) + " |"
