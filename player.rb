@@ -40,7 +40,7 @@ class Player
     get_safe_random_moves
     display_valid_moves(valid_moves)
 
-    puts "Place your move. (ex: '3,4', '5,6')"
+    puts "Place your move."
 
     valid_selection = false
 
