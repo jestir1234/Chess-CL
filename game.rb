@@ -5,7 +5,7 @@ require_relative 'computer'
 
 class Game
 
-  attr_accessor :white_player, :black_player, :current_player, :board, :claimed_white_pieces, :claimed_black_pieces, :game_over, :draw
+  attr_accessor :white_player, :black_player, :current_player, :board, :claimed_white_pieces, :claimed_black_pieces, :game_over, :draw, :human_players_present
 
   def initialize(board = Board.new, player1 = Player.new("white"), player2 = Player.new("black"))
     @white_player = player1
@@ -16,14 +16,15 @@ class Game
     @claimed_black_pieces = []
     @game_over = false
     @draw = false
+    # @human_players_present = !@white_player.is_a?(Computer) || !@black_player.is_a?(Computer)
   end
 
   def play
     until game_over
-      board.display_grid
-      display_captured_pieces
       puts "#{@current_player.color.upcase} player's turn."
       @current_player.turn_count += 1
+      board.display_grid
+      display_captured_pieces
       puts "This is turn #{@current_player.turn_count} for player #{@current_player.color}."
       if board.only_kings_left?
         @draw = true
@@ -62,7 +63,10 @@ class Game
         piece = @current_player.get_piece
         @current_player.class == Player ? start = @current_player.get_start(piece, board) : start = @current_player.get_start_computer(piece, board)
         valid_moves = @current_player.valid_move(@current_player.color, piece, start, board)
-        puts "You can't move that piece right now!" if valid_moves.empty?
+        if valid_moves.empty?
+          system('clear')
+          puts "You can't move that piece right now!"
+        end
       end
       move = @current_player.get_move(valid_moves)
 
@@ -305,6 +309,7 @@ if $PROGRAM_NAME == __FILE__
       correct_input = true
       player1 = Player.new("white")
       player2 = Computer.new("black", "hard")
+      player2.human_opponent = true
       game = Game.new(board, player1, player2)
       game.play
     elsif input == 2

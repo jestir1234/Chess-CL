@@ -63,6 +63,11 @@ class Board
     @cursor = cursor
   end
 
+  def get_piece(pos)
+    row, col = pos
+    grid[row][col]
+  end
+
   def all_positions(color)
     result = []
     (0..7).each do |row|
@@ -167,7 +172,7 @@ class Board
 
   def display_grid
     header = (0...grid.length).to_a.join("    ")
-    puts "     #{header}"
+    puts "    #{header}"
     puts "-------------------------------------------"
     (0...grid.length).each_with_index do |x, i|
       puts "#{x} " + display_row(x) + " |"
