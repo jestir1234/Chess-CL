@@ -96,7 +96,7 @@ class Player
       else
         puts "Invalid piece. Select again."
       end
->>>>>>> cursor
+
     end
     @start_for_piece = @cursor.cursor_pos
     piece_simple
