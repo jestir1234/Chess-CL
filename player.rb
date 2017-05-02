@@ -5,7 +5,7 @@ require 'byebug'
 
 class Player
 
-  attr_accessor :name, :color, :game, :checked, :safe_moves, :board, :turn_count
+  attr_accessor :name, :color, :game, :checked, :safe_moves, :board, :turn_count, :start_for_piece
 
   PIECES = [:k, :q, :p, :r, :h, :b, :p]
 
@@ -14,6 +14,7 @@ class Player
     @checked = false
     @safe_moves = []
     @turn_count = 0
+    @start_for_piece
   end
 
   def get_game(game)
@@ -41,36 +42,29 @@ class Player
 
     puts "Place your move. (ex: '3,4', '5,6')"
 
-    moves = gets.chomp
-    moves = moves.split(",").map { |num| num.to_i }
+    valid_selection = false
 
-    until valid_moves.include?(moves)
-      puts "That is an invalid move. Place another."
-      moves = gets.chomp
-      moves = moves.split(",").map { |num| num.to_i }
+    while valid_selection == false
+      until @cursor.selected == true
+        @cursor.get_input
+        system("clear")
+        board.set_cursor(@cursor)
+        board.display_grid
+      end
+      @cursor.toggle_selected
+      move = @cursor.cursor_pos
+      if valid_moves.include?(move)
+        valid_selection = true
+      else
+        puts "That is an invalid move. Place another."
+      end
     end
-    return moves
+
+    return move
   end
 
   def get_start(piece, board)
-    color = self.color
-    puts "Type the starting position of this piece. (ex: '3,4', '5,6')"
-    board.display_grid
-    start = gets.chomp
-    start = start.split(",").map { |num| num.to_i }
-
-    until valid_start?(start)
-      puts "Invalid starting position. Re-enter coordinates. (ex: '3,4' , '6,5' , '7,1' )"
-      start = gets.chomp
-      start = start.split(",").map {|num| num.to_i}
-    end
-
-    until board.valid_piece?(start, piece, color)
-      puts "Piece is missing from starting position."
-      start = gets.chomp
-      start = start.split(",").map { |num| num.to_i }
-    end
-    start
+    @start_for_piece
   end
 
   def get_piece
@@ -79,20 +73,27 @@ class Player
     puts "Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
     board.display_grid
 
-    until @cursor.selected == true
-      @cursor.get_input
-      system("clear")
-      board.set_cursor(@cursor)
-      board.display_grid
-    end
+    valid_selection = false
+    piece = board.get_piece(@cursor.cursor_pos)
+    while valid_selection == false
+      until @cursor.selected == true
+        @cursor.get_input
+        system("clear")
+        board.set_cursor(@cursor)
+        board.display_grid
+      end
+      @cursor.toggle_selected
+      piece = board.get_piece(@cursor.cursor_pos)
 
-    piece = board.get_piece(@cursor.cursor_pos).to_s[-1].downcase.to_sym
-    
-    until PIECES.include?(piece)
-      puts "Invalid piece, choose another."
-      piece = gets.chomp.to_sym
+      if piece
+        piece_simple = piece.to_s[-1].downcase.to_sym
+        valid_selection = true if board.valid_piece?(@cursor.cursor_pos, piece_simple, @color)
+      else
+        puts "Invalid piece. Select again."
+      end
     end
-    piece
+    @start_for_piece = @cursor.cursor_pos
+    piece_simple
   end
 
   def valid_move(color, piece, start, board)
