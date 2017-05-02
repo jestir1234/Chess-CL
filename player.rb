@@ -70,6 +70,7 @@ class Player
   def get_piece
     get_board
     get_cursor
+    system('clear')
     puts "Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
     board.display_grid
 
@@ -87,7 +88,11 @@ class Player
 
       if piece
         piece_simple = piece.to_s[-1].downcase.to_sym
-        valid_selection = true if board.valid_piece?(@cursor.cursor_pos, piece_simple, @color)
+        if board.valid_piece?(@cursor.cursor_pos, piece_simple, @color)
+          valid_selection = true
+        else
+          puts "Not your piece!"
+        end
       else
         puts "Invalid piece. Select again."
       end

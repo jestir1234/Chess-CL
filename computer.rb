@@ -2,7 +2,7 @@ require_relative 'player'
 
 class Computer < Player
 
-  attr_accessor :board, :mode, :attacking_pos, :checked, :enemy_check_mate, :checkmate_found, :vulnerable_piece_hash, :turn_count
+  attr_accessor :board, :mode, :attacking_pos, :checked, :enemy_check_mate, :checkmate_found, :vulnerable_piece_hash, :turn_count, :human_opponent
 
   def initialize(color, mode = "easy")
     @color = color
@@ -13,9 +13,11 @@ class Computer < Player
     @checkmate_found = false
     @vulnerable_piece_hash = {}
     @turn_count = 0
+    @human_opponent = false
   end
 
   def get_piece
+    sleep(1) if @human_opponent
     get_board
     @checkmate_found = true if check_mate_exists?
     #find all positions of pieces
