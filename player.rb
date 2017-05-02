@@ -74,12 +74,6 @@ class Player
     puts "Select a piece with the arrows on your keyboard. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
     board.display_grid
 
-<<<<<<< HEAD
-    piece = gets.chomp.to_sym
-    until PIECES.include?(piece)
-      puts "Invalid piece, choose another."
-      piece = gets.chomp.to_sym
-=======
     valid_selection = false
     piece = board.get_piece(@cursor.cursor_pos)
     while valid_selection == false
