@@ -17,7 +17,7 @@ class Computer < Player
   end
 
   def get_piece
-    sleep(1) if @human_opponent
+    # sleep(1) if @human_opponent
     get_board
     @checkmate_found = true if check_mate_exists?
     #find all positions of pieces
