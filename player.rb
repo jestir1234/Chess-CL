@@ -71,7 +71,7 @@ class Player
     get_board
     get_cursor
     system('clear')
-    puts "Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
+    puts "Select a piece with the arrows on your keyboard. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
     board.display_grid
 
     valid_selection = false
