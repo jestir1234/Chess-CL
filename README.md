@@ -63,12 +63,6 @@ Select a piece with the arrows on your keyboard and press enter. (ex: 'h' for ho
 -------------------------------------------
 
 
-
-
-
-
-
-
 Place your move.
 2,2
 WHITE moves Horse from [0, 1] to [2, 2]!
