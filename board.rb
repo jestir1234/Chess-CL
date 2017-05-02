@@ -1,4 +1,5 @@
 require 'byebug'
+require 'colorize'
 
 class Board
 
@@ -48,7 +49,7 @@ class Board
     Array.new(8) { Array.new (8)}
   end
 
-  attr_accessor :grid, :piece_images
+  attr_accessor :grid, :piece_images, :cursor
 
   def initialize(grid = Board.default_board, piece_images = false)
     @grid = grid
@@ -56,6 +57,10 @@ class Board
     black_player = "b"
     set_pieces
     @piece_images = piece_images
+  end
+
+  def set_cursor(cursor)
+    @cursor = cursor
   end
 
   def all_positions(color)
@@ -121,6 +126,10 @@ class Board
     return true if grid[row][col].nil?
   end
 
+  def valid_pos?(pos)
+   pos.all? { |coord| coord.between?(0, 7) }
+ end
+
   def place_move(piece, pos, game)
     row = pos[0]
     col = pos[1]
@@ -158,20 +167,52 @@ class Board
 
   def display_grid
     header = (0...grid.length).to_a.join("    ")
-    p "     #{header}"
-    p "-------------------------------------------"
+    puts "     #{header}"
+    puts "-------------------------------------------"
     (0...grid.length).each_with_index do |x, i|
-      p "#{x} " + display_row(x) + " |"
-      p "-------------------------------------------"
+      puts "#{x} " + display_row(x) + " |"
+      puts "-------------------------------------------"
     end
   end
 
   def display_row(x)
     result = []
+    if @cursor
+      cursor = [@cursor.cursor_pos[0], @cursor.cursor_pos[1]]
+    end
+
     if @piece_images
-      (1..grid.length).each_with_index { |el, i| grid[x][i].nil? ? result << "|   " : result << "|" << PIECE_IMAGE[grid[x][i]] << ""}
+      (1..grid.length).each_with_index do |el, i|
+        if grid[x][i].nil?
+          if cursor == [x, i]
+            result << "|" << "  ".colorize(background: :blue)
+          else
+            result << "|   "
+          end
+        else
+          if cursor == [x, i]
+            result << "|" << PIECE_IMAGE[grid[x][i]].colorize(:blue) << ""
+          else
+            result << "|" << PIECE_IMAGE[grid[x][i]] << ""
+          end
+        end
+      end
     else
-      (1..grid.length).each_with_index { |el, i| grid[x][i].nil? ? result << "|   " : result << "|" << grid[x][i]}
+      (1..grid.length).each_with_index do |el, i|
+        if grid[x][i].nil?
+          if cursor == [x, i]
+            result << "|   ".colorize(:blue)
+          else
+            result << "|   "
+          end
+        else
+          if cursor == [x, i]
+            result << "|" << grid[x][i].colorize(:blue)
+          else
+            result << "|"
+          end
+        end
+      end
     end
     result.join(" ")
   end

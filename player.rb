@@ -1,5 +1,6 @@
 require_relative 'piece'
 require_relative 'board'
+require_relative 'cursor'
 require 'byebug'
 
 class Player
@@ -21,6 +22,10 @@ class Player
 
   def get_board
     @board = game.assign_board(self)
+  end
+
+  def get_cursor
+    @cursor = Cursor.new([0, 0], board)
   end
 
   def display_valid_moves(valid_moves)
@@ -50,6 +55,7 @@ class Player
   def get_start(piece, board)
     color = self.color
     puts "Type the starting position of this piece. (ex: '3,4', '5,6')"
+    board.display_grid
     start = gets.chomp
     start = start.split(",").map { |num| num.to_i }
 
@@ -69,7 +75,17 @@ class Player
 
   def get_piece
     get_board
+    get_cursor
     puts "Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
+    board.display_grid
+
+    until @cursor.selected == true
+      @cursor.get_input
+      system("clear")
+      board.set_cursor(@cursor)
+      board.display_grid
+    end
+    debugger
     piece = gets.chomp.to_sym
     until PIECES.include?(piece)
       puts "Invalid piece, choose another."
