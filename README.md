@@ -1,7 +1,7 @@
 # About
 Command-line based chess game built with ruby.
- - Player vs Player with interactive prompts to input pieces and moves.
- - Simple computer AI with the ability to judge piece exchange with opponent, find current check-mate moves, protect vulnerable pieces, and compare enemy piece values when given multiple attacking options.
+ - Player vs Player with keyboard arrow selection for pieces and moves.
+ - Intelligent computer AI with the ability to judge piece exchange with opponent, find current check-mate moves, protect vulnerable pieces, and compare enemy piece values when given multiple attacking options.
 
 
 # Demo
@@ -42,14 +42,34 @@ BLACK:
 
 WHITE player's turn.
 This is turn 1 for player white.
-Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)
-h
-Type the starting position of this piece. (ex: '3,4', '5,6')
-0,1
-Your valid moves:
-[2, 0][2, 2]
+Select a piece with the arrows on your keyboard and press enter. (ex: 'h' for horse, 'k' for king, q, r, b, p)
+    0    1    2    3    4    5    6    7
+-------------------------------------------
+0 | ♜  | ♞  | ♝  | ♛  | ♚  | ♝  | ♞  | ♜  |
+-------------------------------------------
+1 | ♟  | ♟  | ♟  | ♟  | ♟  | ♟  | ♟  | ♟  |
+-------------------------------------------
+2 |    |    |    |    |    |    |    |    |
+-------------------------------------------
+3 |    |    |    |    |    |    |    |    |
+-------------------------------------------
+4 |    |    |    |    |    |    |    |    |
+-------------------------------------------
+5 |    |    |    |    |    |    |    |    |
+-------------------------------------------
+6 | ♙  | ♙  | ♙  | ♙  | ♙  | ♙  | ♙  | ♙  |
+-------------------------------------------
+7 | ♖  | ♘  | ♗  | ♕  | ♔  | ♗  | ♘  | ♖  |
+-------------------------------------------
 
-Place your move. (ex: '3,4', '5,6')
+
+
+
+
+
+
+
+Place your move.
 2,2
 WHITE moves Horse from [0, 1] to [2, 2]!
 "     0    1    2    3    4    5    6    7"
@@ -109,5 +129,5 @@ BLACK:
 
 WHITE player's turn.
 This is turn 2 for player white.
-Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)
+Select a piece with the arrows on your keyboard and press enter. (ex: 'h' for horse, 'k' for king, q, r, b, p)
 ```
