@@ -79,13 +79,6 @@ class Player
     puts "Select your piece. (ex: 'h' for horse, 'k' for king, q, r, b, p)"
     board.display_grid
 
-    until @cursor.selected == true
-      @cursor.get_input
-      system("clear")
-      board.set_cursor(@cursor)
-      board.display_grid
-    end
-    debugger
     piece = gets.chomp.to_sym
     until PIECES.include?(piece)
       puts "Invalid piece, choose another."
