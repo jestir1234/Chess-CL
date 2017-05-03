@@ -15,7 +15,6 @@ class Game
     @claimed_black_pieces = []
     @game_over = false
     @draw = false
-    # @human_players_present = !@white_player.is_a?(Computer) || !@black_player.is_a?(Computer)
   end
 
   def play
