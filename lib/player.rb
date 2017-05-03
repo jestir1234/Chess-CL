@@ -1,7 +1,6 @@
 require_relative 'piece'
 require_relative 'board'
 require_relative 'cursor'
-require 'byebug'
 
 class Player
 

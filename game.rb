@@ -1,7 +1,6 @@
-require 'byebug'
-require_relative 'board'
-require_relative 'player'
-require_relative 'computer'
+require_relative 'lib/board'
+require_relative 'lib/player'
+require_relative 'lib/computer'
 
 class Game
 
