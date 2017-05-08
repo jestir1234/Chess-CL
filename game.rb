@@ -1,6 +1,13 @@
 require_relative 'lib/board'
 require_relative 'lib/player'
 require_relative 'lib/computer'
+require_relative 'lib/piece'
+require_relative 'lib/piece/pawn'
+require_relative 'lib/piece/rook'
+require_relative 'lib/piece/bishop'
+require_relative 'lib/piece/queen'
+require_relative 'lib/piece/horse'
+require_relative 'lib/piece/king'
 
 class Game
 
